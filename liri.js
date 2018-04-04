@@ -9,7 +9,7 @@ const twitterKey = new Twitter(keys.twitter);
 
 // REQUIRED npms
 const twitter = require('twitter');
-const spotify = require('spotify');
+const spotify = require('node-spotify-api');
 
 const request = require("request");
 
@@ -17,10 +17,27 @@ const request = require("request");
 const fs = require("fs");
 
 //grabs arguments from command line
-const arg = process.argv[2];
+const query= process.argv[2];
+const queryArg= process.argv[3];
 
+//COMMAND LINE ARGUMENTS
+switch(query){
+	//Shows last 20 tweets + creation date
+	case 'my-tweets': 
+		tweets(queryArg); 
+		break;
+	//Shows Song + Song Details, Default: 'The Sign' by Ace of Base
+	case 'spotify-this-song': 
+		song(query, queryArg); 
+		break;
+	//Shows Movie Title + Movie Details, Default: 'Mr. Nobody'
+	case 'movie-this': 
+		movie(queryArg);
+		break;
+	//Loads text from random.txt
+	case 'do-what-it-says':
+}
 
-//COMMANDS
 
 //'my-tweets'
 //will show last 20 tweets and when they were created in the terminal.
@@ -31,7 +48,7 @@ const arg = process.argv[2];
 
 //'movie-this'
 // will output title of movie/year/imdb rating/rotten tomatoes rating/country of origin/language/plot/cast
-//Default "Mr.Nobody"
+//Default: 'Mr. Nobody'
 //my omdb api key:  http://www.omdbapi.com/?i=tt3896198&apikey=e9de9dfe
 
 //'do-what-it-says'
