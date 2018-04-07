@@ -95,6 +95,9 @@ function spotifySong () {
         songTitle = userInput.songTitle;
         // if input is empty
         if (!songTitle){
+            console.log('\n');
+            console.log ("You didn't input a song! May I suggest 'The Sign'?: ")
+            console.log('\n');
             songTitle = "The Sign"
         }
         //search spotify with user input
@@ -112,6 +115,7 @@ function spotifySong () {
         //album name
         console.log("Album: " + songData.album.name);
         console.log("-----------------------");
+        console.log('\n');
                 }// end of for loop
             
             //console.log(response);
@@ -139,6 +143,8 @@ function movieThis() {
     }]).then(function (userInput) {
         // if movie title is empty
         if (!movieTitle){
+            console.log('\n');
+            console.log ("You didn't input a movie! May I suggest Mr. Nobody?: ")
             movieTitle = 'Mr. Nobody';
         }
         //for loop for handling user input
