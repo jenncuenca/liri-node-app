@@ -5,14 +5,14 @@ require('dotenv').config();
 const Twitter = require('twitter');
 const Spotify = require('node-spotify-api');
 
-const request = require("request");
-const inquirer = require('inquirer');
-
 // fs for reading/writing files
 const fs = require("fs");
 
 // Grabs api keys
 const keys = require("./api-keys.js");
+const request = require("request");
+const inquirer = require('inquirer');
+
 
 const spotify = new Spotify(keys.spotify);
 const client = new Twitter(keys.twitter);
@@ -93,7 +93,11 @@ function spotifySong () {
         name: 'songTitle'        
     }]).then(function(userInput) {
         songTitle = userInput.songTitle;
-        //search spotify
+        // if input is empty
+        if (!songTitle){
+            songTitle = "The Sign"
+        }
+        //search spotify with user input
         spotify.search({ type: 'track', query: songTitle, limit: 5 })
         .then(function(response) {
                 //for loop to handle query data
@@ -114,6 +118,7 @@ function spotifySong () {
         })
         .catch(function(err) {
           console.log(err);
+          console.log("SONG WAS NOT ENTERED")
         });//end of spotify search
 
 
@@ -132,6 +137,10 @@ function movieThis() {
                     message: 'What movie would you like to search for?',
                     name: 'movieTitle'        
     }]).then(function (userInput) {
+        // if movie title is empty
+        if (!movieTitle){
+            movieTitle = 'Mr. Nobody';
+        }
         //for loop for handling user input
         titleList = userInput.movieTitle.split(' ');
         let len = titleList.length;
