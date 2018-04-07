@@ -58,22 +58,54 @@ function liriOptions() {
 //run LIRI Command Options
 liriOptions();
 
-////// OLD CODE and PSUEDO CODE
-
-// ===== TWITTER ===== //
-//'my-tweets'
+// ===== TWITTER / 'my-tweets' ===== //
 //will show last 20 tweets and when they were created in the terminal.
-// function tweets (){
 
-// };
+function myTweets() {
+    const screenName = {
+        screen_name: 'jenncuenca'
+    };
 
-// ===== SPOTIFY ===== //
-//'spotify-this-song'
+    //request for tweets
+    client.get('statuses/user_timeline', screenName, function (error, tweets, response) {
+        if (!error) {
+            // for loop for handling tweets
+            for (var i = 0; i < tweets.length; i++) {
+                var date = tweets[i].created_at;
+                console.log("@jenncuenca: " + tweets[i].text + " Created: " + date.substring(0, 19));
+                console.log("-----------------------");
+            }
+        } else {
+            console.log('Houston, we have a probelm');
+        }
+
+    }); //end of get request
+
+};
+
+// ===== SPOTIFY / 'spotify-this-song' ===== //
 //will show artist/song name/preview link/album 
 //Default "The Sign" by Ace of Base.
-// function spotifySong () {
+function spotifySong () {
+    inquirer.prompt([{            
+        type: 'input',
+        message: 'What song would you like to search for?',
+        name: 'songTitle'        
+    }]).then(function(userInput) {
+        songTitle = userInput.songTitle;
+        //search spotify
+        spotify.search({ type: 'track', query: songTitle })
+        .then(function(respone) {
+          console.log(response);
+        })
+        .catch(function(err) {
+          console.log(err);
+        });//end of spotify search
 
-// };
+
+    });//end of then function & inquirer
+
+};//end of spotify function
 
 // ===== OMBD/'movie-this'===== //
 // will output title of movie/year/imdb rating/rotten tomatoes rating/country of origin/language/plot/cast
@@ -95,7 +127,7 @@ function movieThis() {
             } else {
                 movieTitle = movieTitle + '+' + titleList[i].toLowerCase();
             }
-        }//end of user input for loop
+        } //end of user input for loop
 
         //for loop for getting movie info
         let len2 = process.argv.length
@@ -110,7 +142,7 @@ function movieThis() {
             }
         } else if (movieTitle === '') {
             console.log('Please add a movie title.');
-        }//end of movie info for loop
+        } //end of movie info for loop
 
         //OMDB API query
         const queryUrl = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&apikey=e9de9dfe";
