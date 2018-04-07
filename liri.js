@@ -14,8 +14,8 @@ const fs = require("fs");
 // Grabs api keys
 const keys = require("./api-keys.js");
 
-let spotifyKey = new Spotify(keys.spotify);
-let twitterKey = new Twitter(keys.twitter);
+const spotify = new Spotify(keys.spotify);
+const client = new Twitter(keys.twitter);
 
 // ===== VARIABLES TO STORE ARGUMENTS AND CHOICES ===== //
 // arguments
@@ -95,7 +95,7 @@ function spotifySong () {
         songTitle = userInput.songTitle;
         //search spotify
         spotify.search({ type: 'track', query: songTitle })
-        .then(function(respone) {
+        .then(function(response) {
           console.log(response);
         })
         .catch(function(err) {
