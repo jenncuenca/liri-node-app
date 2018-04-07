@@ -46,7 +46,7 @@ function liriOptions() {
                 movieThis();
                 break;
             case "do-what-it-says":
-                doWhatItSays();
+                doIt();
                 break;
             default:
                 console.log("Something went horribly wrong...");
@@ -179,8 +179,13 @@ function movieThis() {
 //using fs - text from inside random.txt and use it to call one of LIRI's commands
 //should run 'spotify-this-song' for "I want it that way"
 
-// function doIt () {
+function doIt () {
+    fs.readFile('random.txt', "utf8", function(error, data){
+        var txt = data.split(',');
+    
+        spotifySong(txt[1]);
+    });//end of fs
 
-// };
+};
 
 //BONUS: in addition to logging data, output data to a log.txt file as an append.
