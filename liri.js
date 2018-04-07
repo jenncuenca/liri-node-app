@@ -94,9 +94,23 @@ function spotifySong () {
     }]).then(function(userInput) {
         songTitle = userInput.songTitle;
         //search spotify
-        spotify.search({ type: 'track', query: songTitle })
+        spotify.search({ type: 'track', query: songTitle, limit: 5 })
         .then(function(response) {
-          console.log(response);
+                //for loop to handle query data
+                for(var i = 0; i < response.tracks.items.length; i++){
+                    var songData = response.tracks.items[i];
+        //artist
+        console.log("Artist: " + songData.artists[0].name);
+        //song name
+        console.log("Song: " + songData.name);
+        //spotify preview link
+        console.log("Preview URL: " + songData.preview_url);
+        //album name
+        console.log("Album: " + songData.album.name);
+        console.log("-----------------------");
+                }// end of for loop
+            
+            //console.log(response);
         })
         .catch(function(err) {
           console.log(err);
