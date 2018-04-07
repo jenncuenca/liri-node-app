@@ -18,9 +18,9 @@ const spotify = new Spotify(keys.spotify);
 const client = new Twitter(keys.twitter);
 
 // ===== VARIABLES TO STORE ARGUMENTS AND CHOICES ===== //
-// arguments
-const nodeArg = process.argv;
-const nodeArgCommand = process.argv[2];
+// // arguments
+// const nodeArg = process.argv;
+// const nodeArgCommand = process.argv[2];
 
 // user inputs
 let songTitle = '';
@@ -76,7 +76,7 @@ function myTweets() {
                 console.log("-----------------------");
             }
         } else {
-            console.log('Houston, we have a probelm');
+            console.log('Houston, we have a problem');
         }
 
     }); //end of get request
