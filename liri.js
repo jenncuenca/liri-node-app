@@ -70,7 +70,11 @@ function myTweets() {
                 //
                 fs.appendFile('log.txt', '\n ===== TWITTER QUERY ===== \n'
                                         + "@jenncuenca: " + tweets[i].text + " Created: " + date.substring(0, 19)
-                                        + "-----------------------");
+                                        + "-----------------------"
+                                    , function (){
+                                        console.log("Last 20 Tweets Logged.")
+                                    })
+                                    ;
             }
         } else {
             console.log('Houston, we have a problem');
@@ -126,7 +130,10 @@ const songSearch = function(songTitle){
                             + "Preview URL: " + songData.preview_url
                             + "Album: " + songData.album.name
                             + "-----------------------"
-                            + '\n');
+                            + '\n'
+                            , function (){
+                                console.log("Song Search Logged.")
+                            });
 
             }// end of for loop
         
@@ -194,7 +201,6 @@ const movieSearch = function(movieTitle){
         console.log("\n+ Plot: " + movieInfo.Plot + "\n");
         console.log("+ Cast: " + movieInfo.Actors);
         console.log('\n');
-
         //adds text to log.txt
         fs.appendFile('log.txt', '\n ===== OMBD QUERY ===== \n'
                                     + '+ Title: ' + movieInfo.Title
@@ -205,7 +211,10 @@ const movieSearch = function(movieTitle){
                                     + '+ Language: ' + movieInfo.Language
                                     + '\n + Plot: ' + movieInfo.Plot + '\n'
                                     + '+ Cast: ' + movieInfo.Actors
-                                    +'\n');
+                                    +'\n'
+                                    , function (){
+                                        console.log("Movie Search Logged.")
+                                    });
     
 
     });//end of request
